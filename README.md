@@ -25,7 +25,7 @@ void main() {
 
 ## Changelog
 
-v0.01a
+**v0.01a**
 
   * First working code
   * Just a static server
