@@ -1,5 +1,5 @@
 // simple_server.dart
-// Main test file, this is where the magic happens
+// A very simple static server
 
 #import("dart:io");
 #import("../Target.dart");
@@ -10,8 +10,7 @@ void main() {
   
   Target.redirections = {
     "/test": "test.html",
-    "/hello": "index.html",
-    "/dd": "test/index.html"
+    "/tindex": "test/index.html"
   };
   
   /*Target.redirections = {
@@ -21,5 +20,9 @@ void main() {
   File script = new File(new Options().script);
   script.directory((Directory d) {
     Target.createServer(d.path + "/public", 8800);
+    Target.serverCallback = () {
+      // Just do your job Target...
+      Target.respond(null);
+    };
   });
 }

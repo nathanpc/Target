@@ -1,2 +1,3 @@
 tests/simple_server.dart
+tests/callback_server.dart
 Target.dart
