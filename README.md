@@ -29,6 +29,10 @@ void main() {
 
 ## Changelog
 
+**v0.02a**
+
+  * Added support for page redirections
+
 **v0.01a**
 
   * First working code
