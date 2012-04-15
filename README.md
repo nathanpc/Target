@@ -27,6 +27,8 @@ void main() {
 }
 ```
 
+I recommend you to check out the [**Wiki**][1] for more information, help and learn more about page redirections and other cool things.
+
 ## Changelog
 
 **v0.02a**
@@ -38,3 +40,6 @@ void main() {
   * First working code
   * Just a static server
   * Redirects `{path}/` to `{path}/index.html`
+
+
+[1]: https://github.com/nathanpc/Target/wiki
