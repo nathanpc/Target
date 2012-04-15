@@ -1,5 +1,5 @@
 // Target.dart
-// Target's main file
+// Target's main file (v0.02a)
 
 #library("target");
 
@@ -18,9 +18,7 @@ class Target {
     server.listen(location, port);
 
     server.onRequest = (HttpRequest request, HttpResponse response) {
-      
       print(request.path);
-      //print("\n==================\n");
 
       var file;
 
