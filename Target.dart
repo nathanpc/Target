@@ -8,6 +8,8 @@
 
 /** Target server. */
 class Target {
+  Map redirections;
+  
   /**
    * Initiate the server instance.
    */
@@ -16,15 +18,38 @@ class Target {
     server.listen(location, port);
 
     server.onRequest = (HttpRequest request, HttpResponse response) {
+      
       print(request.path);
-      print("\n==================\n");
+      //print("\n==================\n");
 
       var file;
 
-      if (request.path.endsWith("/")) {
-        file = new File("${basePath}/${request.path}index.html");
+      if (redirections.containsKey("none")) {
+        // Is called when the developer hasn't set any page redirections.
+        if (request.path.endsWith("/")) {
+          file = new File("${basePath}/${request.path}index.html");
+        } else {
+          file = new File("${basePath}/${request.path}");
+        }
+      } else if (redirections.containsKey(request.path)) {
+        // Is called if the developer set any page redirections.
+        if (redirections.containsKey(request.path)) {
+          file = new File("${basePath}/${redirections[request.path]}");
+        } else {
+          if (request.path.endsWith("/")) {
+            file = new File("${basePath}/${request.path}index.html");
+          } else {
+            file = new File("${basePath}/${request.path}");
+          }
+        }
       } else {
-        file = new File("${basePath}/${request.path}");
+        // Is called if the developer set any page redirections and the user
+        // requests a page that isn't included in the redirection.
+        if (request.path.endsWith("/")) {
+          file = new File("${basePath}/${request.path}index.html");
+        } else {
+          file = new File("${basePath}/${request.path}");
+        }
       }
 
       file.exists((found) {

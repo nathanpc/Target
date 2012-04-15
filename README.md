@@ -15,6 +15,10 @@ the features of the server. Anyhow, here is how you create a simple server:
 
 void main() {
   var Target = new Target();
+
+  Target.redirections = {
+    "none": ""
+  };
   
   File script = new File(new Options().script);
   script.directory((Directory d) {
@@ -29,4 +33,4 @@ void main() {
 
   * First working code
   * Just a static server
-  * Redirects "{path}/" to "{path}/index.html"
+  * Redirects `{path}/` to `{path}/index.html`
