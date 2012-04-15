@@ -72,6 +72,11 @@ I recommend you to check out the [**Wiki**][1] for more information, help and le
 
 ## Changelog
 
+**v0.1a**
+
+  * Added a callback method to the server instance `Target.serverCallback()` so you can dynamically parse requests and respond to them
+  * Added the `respond()` method to the dynamic responses
+
 **v0.02a**
 
   * Added support for page redirections

@@ -1,5 +1,5 @@
 // Target.dart
-// Target's main file (v0.02a)
+// Target's main file (v0.1a)
 
 #library("target");
 
@@ -29,7 +29,7 @@ class Target {
       res = response;
       
       /**
-       * Respond dinamicaly, or not, to the request
+       * Respond dynamically, or not, to the request
        */
       respond = (String userRes, [int status = HttpStatus.OK]) {
         if (userRes == null) {
