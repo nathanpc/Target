@@ -5,7 +5,7 @@ Dart's easy, simple and fast web server.
 
 ## Examples
 
-If you look at the tests folder you'll have all the debug codes I made to test
+If you look at the `tests` folder you'll have all the debug codes I made to test
 the features of the server. Anyhow, here is how you create a simple server:
 
 ```
