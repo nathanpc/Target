@@ -29,7 +29,7 @@ class Target {
       res = response;
       
       /**
-       * Respond dynamically, or not, to the request
+       * Respond dynamically, or not, to the request.
        */
       respond = (String userRes, [int status = HttpStatus.OK]) {
         if (userRes == null) {
@@ -84,7 +84,7 @@ class Target {
       };
       
       /**
-       * Executes the request/response stuff
+       * Executes the request/response stuff.
        */
       serverCallback();
     };

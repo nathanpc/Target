@@ -23,7 +23,7 @@ void main() {
     
     // Don't just redirect, do what I want you to do!
     Target.serverCallback = () {
-      print("From the server test script: ${Target.req.path}");
+      print("${Target.req.method}: ${Target.req.path}");
       
       if (Target.req.path == "/response_test") {
         // Respond with a HTML file.
