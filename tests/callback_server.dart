@@ -19,13 +19,11 @@ void main() {
   
   File script = new File(new Options().script);
   script.directory((Directory d) {
-    Target.createServer(d.path + "/public", 8800);
-    
     // Don't just redirect, do what I want you to do!
-    Target.serverCallback = () {
-      print("${Target.req.method}: ${Target.req.path}");
+    Target.createServer(d.path + "/public", 8800, (req, res) {
+      print("${req.method}: ${req.path}");
       
-      if (Target.req.path == "/response_test") {
+      if (req.path == "/response_test") {
         // Respond with a HTML file.
         File hfile = new File("${Target.basePath}/test/resp.html");
         hfile.exists((found) {
@@ -39,13 +37,13 @@ void main() {
             Target.respond("error", HttpStatus.NOT_FOUND);
           }
         });
-      } else if (Target.req.path == "/hello") {
+      } else if (req.path == "/hello") {
         // Respond with your own generated HTML.
         Target.respond("<h1>Hello, World!</h1>");
       } else {
         // Just make a normal redirect.
         Target.respond(null);
       }
-    };
+    });
   });
 }

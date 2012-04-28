@@ -19,10 +19,9 @@ void main() {
   
   File script = new File(new Options().script);
   script.directory((Directory d) {
-    Target.createServer(d.path + "/public", 8800);
-    Target.serverCallback = () {
+    Target.createServer(d.path + "/public", 8800, (req, res) {
       // Just do your job Target...
       Target.respond(null);
-    };
+    });
   });
 }

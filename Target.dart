@@ -1,5 +1,5 @@
 // Target.dart
-// Target's main file (v0.1a)
+// Target's main file (v0.2a)
 
 #library("target");
 
@@ -19,9 +19,9 @@ class Target {
   /**
    * Initiate the server instance.
    */
-  void createServer(String path, int port, [String location = "127.0.0.1"]) {
+  void createServer(String path, int port, [void callback(HttpRequest requ, HttpResponse resp)]) {
     var server = new HttpServer();
-    server.listen(location, port);
+    server.listen("127.0.0.1", port);
     basePath = path;
 
     server.onRequest = (HttpRequest request, HttpResponse response) {
@@ -83,10 +83,20 @@ class Target {
         
       };
       
-      /**
-       * Executes the request/response stuff.
-       */
-      serverCallback();
+      // Executes the request/response stuff.
+      callback(request, response);
     };
+  }
+  
+  void setCookie(String name, String value, String date) {
+    if (date == null) {
+      res.setHeader("Set-Cookie", "${name}=${value}");
+    } else {
+      res.setHeader("Set-Cookie", "${name}=${value}; Expires=${date}");
+    }
+  }
+  
+  String getCookie(String name) {
+    // Get cookie (stil to be implemented)
   }
 }
