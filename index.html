@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Target by nathanpc</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Target</h1>
+        <p>Dart's easy, simple and fast web server</p>
+        <p class="view"><a href="https://github.com/nathanpc/Target">View the Project on GitHub <small>nathanpc/Target</small></a></p>
+        <ul>
+          <li><a href="https://github.com/nathanpc/Target/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nathanpc/Target/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nathanpc/Target">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>Examples</h2>
+
+<p>If you look at the <code>tests</code> folder you'll have all the debug codes I made to test
+the features of the server. Anyhow, here is how you create a simple server:</p>
+
+<pre><code>#import("dart:io");
+#import("Target.dart");
+
+
+void main() {
+  var Target = new Target();
+
+  Target.redirections = {
+    "none": ""
+  };
+
+  File script = new File(new Options().script);
+  script.directory((Directory d) {
+    Target.createServer(d.path + "/public", 8800, (req, res) {
+      // Just do your job Target...
+      Target.respond(null);
+    });
+  });
+}
+</code></pre>
+
+<p>If you want to create a more advanced server where you want to handle requests and respond to them dynamically you just need to use the callback method in the <code>createServer</code> function with a <code>respond()</code>, like this:</p>
+
+<pre><code>// Same as the simple server, but...
+
+// Don't just redirect, do what I want you to do!
+Target.createServer(d.path + "/public", 8800, (req, res) {
+  print("${req.method}: ${req.path}");
+
+  if (req.path == "/response_test") {
+    // Respond with a HTML file.
+    File hfile = new File("${Target.basePath}/test/resp.html");
+    hfile.exists((found) {
+      if (found) {
+        hfile.readAsText(Encoding.UTF_8, (String text) {
+          Target.respond(text);
+        });
+      } else {
+        // If the file wasn't found return a 404.
+        print("404");
+        Target.respond("error", HttpStatus.NOT_FOUND);
+      }
+    });
+  } else if (req.path == "/hello") {
+    // Respond with your own generated HTML.
+    Target.respond("&lt;h1&gt;Hello, World!&lt;/h1&gt;");
+  } else {
+    // Just make a normal redirect.
+    Target.respond(null);
+  }
+});
+
+// Close the rest of the calls.
+</code></pre>
+
+<p>I recommend you to check out the <a href="https://github.com/nathanpc/Target/wiki"><strong>Wiki</strong></a> for more information, help and learn more about page redirections and other cool things.</p>
+
+<h2>Changelog</h2>
+
+<p><strong>v0.2a</strong></p>
+
+<ul>
+<li>Added a way of setting cookies with the <code>setCookie()</code> method</li>
+<li>
+<code>serverCallback()</code> deprecated</li>
+<li>Added a callback method to the <code>createServer()</code> to be used as in the examples</li>
+</ul><p><strong>v0.1a</strong></p>
+
+<ul>
+<li>Added a callback method to the server instance <code>Target.serverCallback()</code> so you can dynamically parse requests and respond to them</li>
+<li>Added the <code>respond()</code> method to the dynamic responses</li>
+</ul><p><strong>v0.02a</strong></p>
+
+<ul>
+<li>Added support for page redirections</li>
+</ul><p><strong>v0.01a</strong></p>
+
+<ul>
+<li>First working code</li>
+<li>Just a static server</li>
+<li>Redirects <code>{path}/</code> to <code>{path}/index.html</code>
+</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/nathanpc">nathanpc</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30904257-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
