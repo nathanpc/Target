@@ -69,6 +69,12 @@ I recommend you to check out the [**Wiki**][1] for more information, help and le
 
 ## Changelog
 
+**v0.2a**
+
+  * Added a way of setting cookies with the `setCookie()` method
+  * `serverCallback()` deprecated
+  * Added a callback method to the `createServer()` to be used as in the examples
+
 **v0.1a**
 
   * Added a callback method to the server instance `Target.serverCallback()` so you can dynamically parse requests and respond to them
